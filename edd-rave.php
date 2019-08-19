@@ -4,7 +4,7 @@
 Plugin Name: Rave payment gateway for Easy Digital Downloads
 Plugin URI: https://ravepay.co/
 Description: Accept payments using the Rave Payment Gateway
-Version: 1.0.0
+Version: 1.1.0
 Author: Rave by Flutterwave
 Author URI: https://ravepay.co/
 */
@@ -38,6 +38,8 @@ class EDD_Rave{
 		$this->msg = null;
 		$this->method_title = __( "Rave", 'edd-rave' );
 		$this->method_description = __( "PCI DSS Complaint payment gateway for recieving payments via cards, bank accounts, and USSD", 'edd-rave' );
+		$this->base_url = 'https://api.ravepay.co';
+		
 		
 		if (is_admin()){
 			add_filter( 'edd_settings_gateways', array($this, 'add_gateway_settings') );
@@ -54,13 +56,13 @@ class EDD_Rave{
 		add_action( 'wp_enqueue_scripts', array( $this, 'payment_scripts' ) );
 		
 		if(edd_is_test_mode()){
-			$this->base_url = 'https://ravesandboxapi.flutterwave.com';
+			// $this->base_url = 'https://ravesandboxapi.flutterwave.com';
 			$this->public_key = @$edd_options['sandbox_public_key'];
 			$this->secret_key = @$edd_options['sandbox_secret_key'];
 
-     	}else{
+     	}else{ 
 
-     		$this->base_url = 'https://api.ravepay.co';
+     		// $this->base_url = 'https://api.ravepay.co';
      		$this->public_key = @$edd_options['live_public_key'];
 			$this->secret_key = @$edd_options['live_secret_key'];
      	}
@@ -114,6 +116,13 @@ class EDD_Rave{
 		$currencies['GHS'] = __('Ghana Cedis (&#8373;)', 'edd_rave');
 		$currencies['KES'] = __('Kenyan Shilling (KSh)', 'edd_rave');
 		$currencies['NGN'] = __('Nigerian Naira (&#8358;)', 'edd_rave');
+		$currencies['ZAR'] = __('South African Rands', 'edd_rave');
+		$currencies['RWF'] = __('Rwandan Franc', 'edd_rave');
+		$currencies['UGX'] = __('Ugandan Shilling', 'edd_rave');
+		$currencies['TZS'] = __('Tanzanian Shilling', 'edd_rave');
+		$currencies['SLL'] = __('Sierra Leone Leone', 'edd_rave');
+		$currencies['ZMW'] = __('Zambian Kwacha', 'edd_rave');
+		$currencies['XAF'] = __('Central African Republic Franc', 'edd_rave');
 		return $currencies;
 	}
 	
@@ -153,6 +162,12 @@ class EDD_Rave{
 				break;
 			case 'KES':
 				$country = 'KE';
+				break;
+			case 'ZAR':
+				$country = 'ZA';
+				break;
+			case 'TZS':
+				$country = 'TZ';
 				break;
 			
 			default:
