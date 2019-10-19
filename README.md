@@ -23,10 +23,11 @@ Download the plugin zip file.
 - Configure your Rave Payment Gateway settings accordingly.
 
 ### Enable/Disable - check the box to enable Rave Payment Gateway.
+
 - Mode - check the box to enable Live Mode.
-- Rave Test Public Key - enter your test public key
-- Rave Test Secret Key - enter your test secret key
-- Rave Live Public Key - enter your live public key
-- Rave Live Secret Key - enter your live secret key
+- Rave Test Public Key - ${public_key}
+- Rave Test Secret Key - ${secret_key}
+- Rave Live Public Key - ${live_public_key}
+- Rave Live Secret Key - ${live_secret_key}
 
 Click Save Changes to save your changes.
